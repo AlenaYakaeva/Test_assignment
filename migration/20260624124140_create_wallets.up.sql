@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS wallets (
+    WalletID  UUID PRIMARY KEY  DEFAULT gen_random_uuid(),
+    Amount NUMERIC(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
