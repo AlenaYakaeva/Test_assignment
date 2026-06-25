@@ -1,0 +1,12 @@
+template: testify
+force-file-write: true
+
+
+packages:
+  exampleApp/internal:
+    config:
+      recursive: true
+      all: true
+      dir: internal/mocks
+      pkgname: mocks
+      filename: "mock_{{.InterfaceName}}.go"
