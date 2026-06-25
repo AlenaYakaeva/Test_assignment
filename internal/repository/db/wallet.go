@@ -20,10 +20,10 @@ func (s *Storage) GetBalanceByID(uuid string) (float64, error) {
 	return balance, nil
 }
 
-func (s *Storage) AddOrUpdateWallet(w wallet.WalletRequest) (wallet.Wallet, error) {
+func (s *Storage) AddOrUpdateWallet(ctx context.Context, w wallet.WalletRequest) (wallet.Wallet, error) {
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
+	// ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	// defer cancel()
 	koef := 1.0
 	if w.OperationType == "WITHDRAW" {
 		koef = -1.0

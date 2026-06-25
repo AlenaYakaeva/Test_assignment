@@ -15,7 +15,7 @@ type Config struct {
 
 func ReadConfig() *Config {
 	if err := godotenv.Load("config.env"); err != nil {
-		//log.Printf("Предупреждение: файл config.env не найден, используются дефолтные значения или системный env: %v", err)
+		//log.Printf("Предупреждение: файл config.env не найден, используются дефолтные значения или системный env: %w", err)
 		panic(err)
 	}
 

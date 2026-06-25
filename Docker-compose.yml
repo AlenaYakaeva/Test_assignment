@@ -22,6 +22,7 @@ services:
       - EXAMPLER_SERVICE_DB_DSN=postgres://postgres:postgresql_pass@db:5432/example_app?sslmode=disable
     volumes:
       - ./migration:/root/migration
+      - ./config.env:/root/config.env
     depends_on:
       db:
         condition: service_healthy

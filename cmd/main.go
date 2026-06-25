@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+
 	cfg := internal.ReadConfig()
 	repo, err := db.New(cfg.DBDSN)
 	if err != nil {

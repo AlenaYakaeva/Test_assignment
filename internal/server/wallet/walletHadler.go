@@ -1,15 +1,17 @@
 package wallet
 
 import (
+	"context"
 	walletDomain "exampleApp/internal/domain/wallet"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
 type WalletService interface {
 	GetBalanceByID(string) (float64, error)
-	ChageAmount(walletDomain.WalletRequest) (walletDomain.Wallet, error)
+	ChageAmount(context.Context, walletDomain.WalletRequest) (walletDomain.Wallet, error)
 }
 
 type WalletHandler struct {
@@ -39,8 +41,9 @@ func (wh *WalletHandler) ChageAmount(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	w, err := wh.walletService.ChageAmount(req)
+	ctxChange, cancel := context.WithTimeout(ctx.Request.Context(), 5*time.Second)
+	defer cancel()
+	w, err := wh.walletService.ChageAmount(ctxChange, req)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
